@@ -2,6 +2,9 @@
 
 # dependencies
 /node_modules
+/front/node_modules
+/server/node_modules
+
 /.pnp
 .pnp.js
 
@@ -23,5 +26,3 @@ yarn-debug.log*
 yarn-error.log*
 
 /.idea
-
-/z-server/node_modules

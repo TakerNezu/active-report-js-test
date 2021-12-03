@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "server.ts",
+  "license": "MIT",
+  "module": "typescript",
+  "scripts": {
+    "eslint:lint": "eslint . --ext ts,tsx",
+    "dev": "yarn run run-p dev:*",
+    "dev:build": "yarn run gulp server",
+    "dev:start": "node server.js"
+  },
+  "dependencies": {
+    "@types/node": "^16.11.11",
+    "edit-json-file": "^1.6.2",
+    "eslint": "^8.3.0",
+    "fastify": "^3.24.1",
+    "typescript": "^4.5.2",
+    "yarn-run-all": "^3.1.1"
+  },
+  "devDependencies": {
+    "@types/edit-json-file": "^1.6.1",
+    "@types/gulp": "^4.0.9",
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "@typescript-eslint/parser": "^5.5.0",
+    "eslint": "^8.3.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
