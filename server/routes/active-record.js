@@ -13,7 +13,9 @@ exports["default"] = (function (server, options, next) {
         handler: function (request, reply) {
             // json file を読み込み
             var req = request.query;
+            console.log(request.query);
             (0, db_1.dataSet)('taxExemptLocation', req.taxExemptLocation);
+            reply.send('ok');
         }
     });
     next();

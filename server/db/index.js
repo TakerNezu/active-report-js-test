@@ -2,7 +2,7 @@
 exports.__esModule = true;
 exports.dataSet = exports.jsonData = void 0;
 var fs = require("fs");
-var fileContent = fs.readFileSync(__dirname + "/db.json", "utf8");
+var fileContent = fs.readFileSync(process.env.SERVER_ABSOLUTE_PATH + "db/db.json", "utf8");
 exports.jsonData = JSON.parse(fileContent);
 function dataSet(key, value) {
     var _a;
@@ -16,7 +16,9 @@ function dataSet(key, value) {
     else {
         preText = (_a = {}, _a[key] = value, _a);
     }
+    console.log(preText);
     var text = JSON.stringify(preText);
-    fs.writeFileSync(__dirname + './db.json', text);
+    console.log(text);
+    fs.writeFileSync(process.env.SERVER_ABSOLUTE_PATH + 'db/db.json', text);
 }
 exports.dataSet = dataSet;

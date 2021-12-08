@@ -1,6 +1,7 @@
 import * as fs from "fs";
+import fastify from "fastify";
 
-const fileContent = fs.readFileSync(__dirname + "/db.json", "utf8");
+const fileContent = fs.readFileSync(process.env.SERVER_ABSOLUTE_PATH + "db/db.json", "utf8");
 interface Data {
   taxExemptLocation: string
 }
@@ -17,6 +18,8 @@ export function dataSet(key: string, value: string) {
     preText = {[key]: value}
   }
 
+  console.log(preText)
   const text = JSON.stringify(preText)
-  fs.writeFileSync(__dirname + './db.json', text)
+  console.log(text)
+  fs.writeFileSync(process.env.SERVER_ABSOLUTE_PATH + 'db/db.json', text)
 }

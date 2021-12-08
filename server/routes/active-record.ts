@@ -13,7 +13,9 @@ export default (server: any, options: any, next: any): void => {
     handler: (request: FastifyRequest, reply: FastifyReply) => {
       // json file を読み込み
       const req = request.query as {taxExemptLocation: string}
+      console.log(request.query)
       dataSet('taxExemptLocation', req.taxExemptLocation)
+      reply.send('ok')
     }
   })
 

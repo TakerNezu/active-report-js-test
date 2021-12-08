@@ -9,26 +9,29 @@ import "@grapecity/activereports/htmlexport";
 import "@grapecity/activereports/xlsxexport";
 import "@grapecity/activereports-localization";
 import axios from "axios";
+import {useState} from "react";
 
 function App() {
-    axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
-    let data = ''
+  const [data, setData] = useState("");
     const handleGet = () => {
         axios
             .get('http://127.0.0.1:8080/active-record')
-            .then(res => {
-                data = res.data.taxExemptLocation
-            })
-    }
-    const handleChange = (event) => {
-        data = event.target.value
+            .then(res => setData(res.data.taxExemptLocation))
     }
     const handleSubmit = () => {
         axios
-            .post('http://127.0.0.1:8080/active-record', {
-                taxExemptLocation: data
-            })
+            .post('http://127.0.0.1:8080/active-record', {taxExemptLocation: data})
     }
+  const printDocument = (documentId) => {
+    const doc = document.getElementById(documentId);
+
+    //Wait until PDF is ready to print
+    if (typeof doc.print === 'undefined') {
+      setTimeout(function(){printDocument(documentId);}, 1000);
+    } else {
+      doc.print();
+    }
+  }
     return (
       <BrowserRouter>
           <ul>
@@ -48,11 +51,22 @@ function App() {
                       <form onSubmit={() => null}>
                           <label>
                               taxExemptLocation
-                              <input type="text" value={data} onChange={handleChange}/>
+                              <input type="text" value={data} onChange={e => setData(e.target.value)}/>
                           </label>
                           <button type="button" onClick={handleSubmit}>保存</button>
                       </form>
                   </div>
+              } />
+              <Route path='/print' element={
+                <div>
+                  <embed
+                    type="application/pdf"
+                    src="reports/test.pdf"
+                    id="aaa"
+                    width="100%"
+                    height="100%" />
+                  <button onClick={printDocument("aaa")}>印刷</button>
+                </div>
               } />
           </Routes>
       </BrowserRouter>
